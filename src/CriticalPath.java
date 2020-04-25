@@ -40,6 +40,7 @@ public class CriticalPath
         // 4. calculate all LS
         calculateLS(tasks);
 
+        // Print final matrix
         printProjectMatrix(tasks);
     }
 
@@ -125,11 +126,13 @@ public class CriticalPath
     }
 
     /* Prints a project matrix */
-    public static void printProjectMatrix(List<TaskNode> tasks)
+    private static void printProjectMatrix(List<TaskNode> tasks)
     {
-        // write printHeader()
+        // Table format and row separators
         String dottedLine = "-----------------------------------------------------------------";
-        String lineFormat = "|%6s\t|%6s\t|%6s\t|%6s\t|%6s\t|%6s\t|%6s\t|%6s\t|\n"; 
+        String lineFormat = ("%c%6s\t%c%6s\t%c%6s\t%c%6s\t%c%6s\t%c%6s\t%c%6s\t%c%6s\t%c\n").replace("%c", "|"); 
+
+        // Print header
         System.out.println(dottedLine);
         System.out.printf(lineFormat, "Task", "Value", "ES", "EF", "LF", "LS", "LS-ES", "LF-EF");
         System.out.println(dottedLine);
