@@ -70,6 +70,11 @@ public class TaskNode implements Comparable<TaskNode>
         return lateStart;
     }
 
+    public boolean hasSlack()
+    {
+        return !(((lateFinish - earlyFinish) == 0) || ((lateStart - earlyStart) == 0));
+    }
+
     public void addSuccessors(TaskNode... successors)
     {
         for (TaskNode successor : successors)
