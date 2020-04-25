@@ -1,6 +1,6 @@
 # CPM Processing Chart Output
 - The code from the [main method](#Main-Method) was used to construct the following critical path method table
-- See the [homework]() for a graphical representation
+- See the [homework](https://github.com/tpang29/Critical-Path-Method/blob/master/CPM%20Network%20Homework.pdf) for a graphical representation
 ```
 Thomass-MacBook-Pro:cpm thomaspang$ javac *.java
 Thomass-MacBook-Pro:cpm thomaspang$ java HomeworkDriver
