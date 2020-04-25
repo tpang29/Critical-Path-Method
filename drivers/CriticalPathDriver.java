@@ -30,5 +30,7 @@ public class CriticalPathDriver
         taskG.addSuccessors(taskC, taskE, taskF);
 
         CriticalPath.calculate(taskA, taskF);
+
+        TaskNode[] tasks = {taskA, taskB, taskC, taskD, taskE, taskF, taskG};
     }
 }
