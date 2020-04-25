@@ -2,11 +2,12 @@ package cpm.src;
 
 import java.util.Iterator;
 import java.util.HashSet;
+import java.util.Set;
 
-public class TaskNode
-{
-    private HashSet<TaskNode> successors;
-    private HashSet<TaskNode> predecessors;
+public class TaskNode implements Comparable<TaskNode>
+{ 
+    private Set<TaskNode> successors;
+    private Set<TaskNode> predecessors;
     private String name;
     private int value;
     private int earlyStart;
@@ -29,12 +30,12 @@ public class TaskNode
         predecessors = new HashSet<TaskNode>();
     }
 
-    public HashSet<TaskNode> getSucessors()
+    public Set<TaskNode> getSucessors()
     {
         return successors;
     }
 
-    public HashSet<TaskNode> getPredecessors()
+    public Set<TaskNode> getPredecessors()
     {
         return predecessors;
     }
@@ -69,56 +70,47 @@ public class TaskNode
         return lateStart;
     }
 
-    public boolean addSuccessor(TaskNode successors)
+    public void addSuccessors(TaskNode... successors)
     {
-        if (successors.add(successor))
+        for (TaskNode successor : successors)
         {
-            successor.addPredecessor(this);
-            return true;
-        }
-        else
-        {
-            return false;
+            if (this.successors.add(successor))
+            {
+                successor.predecessors.add(this);
+            }
         }
     }
 
-    public boolean addPredecessor(TaskNode predecessor)
+    public void removeSuccessors(TaskNode... successors)
     {
-        if (predecessors.add(predecessor))
+        for (TaskNode successor : successors)
         {
-            predecessor.addSuccessor(this);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-        
-    }
-
-    public boolean removeSuccessor(TaskNode successor)
-    {
-        if (successors.remove(successor))
-        {
-            successor.removePredecessor(this);
-            return true;
-        }
-        else
-        {
-            return false;
+            if (this.successors.remove(successor))
+            {
+                successor.predecessors.remove(this);
+            }
         }
     }
 
-    public boolean removePredecessor(TaskNode predecessor)
+    public void addPredecessors(TaskNode... predecessors)
     {
-        if (predecessors.remove(predecessor))
+        for (TaskNode predecessor : predecessors)
         {
-            predecessor.removeSuccessor(this);
-            return true;
+            if (this.predecessors.add(predecessor))
+            {
+                predecessor.successors.add(this);
+            }
         }
-        else
+    }
+
+    public void removePredecessors(TaskNode... predecessors)
+    {
+        for (TaskNode predecessor : predecessors)
         {
-            return false;
+            if (this.predecessors.remove(predecessor))
+            {
+                predecessor.successors.remove(this);
+            }
         }
     }
 
@@ -170,6 +162,12 @@ public class TaskNode
             TaskNode neighbor = iterator.next();
             System.out.printf("Name:\t%s\tValue:\t%s\n", neighbor.getName(), neighbor.getValue());
         }
+    }
+
+    @Override
+    public int compareTo(TaskNode o)
+    {
+        return this.getName().compareTo(o.getName());
     }
 
 }
