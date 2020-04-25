@@ -1,6 +1,4 @@
-package cpm.src;
-
-import cpm.src.TaskNode;
+import TaskNode;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -177,6 +175,5 @@ public class CriticalPath
         
         return sortedTasks;
     }
-
     
 }
