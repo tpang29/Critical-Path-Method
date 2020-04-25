@@ -128,18 +128,23 @@ public class CriticalPath
     public static void printProjectMatrix(List<TaskNode> tasks)
     {
         // write printHeader()
-        String dottedLine = "-------------------------------------------------";
-        String lineFormat = "|%6s\t|%6s\t|%6s\t|%6s\t|%6s\t|%6s\t|\n"; 
+        String dottedLine = "-----------------------------------------------------------------";
+        String lineFormat = "|%6s\t|%6s\t|%6s\t|%6s\t|%6s\t|%6s\t|%6s\t|%6s\t|\n"; 
         System.out.println(dottedLine);
-        System.out.printf(lineFormat, "Task", "Value", "ES", "EF", "LF", "LS");
+        System.out.printf(lineFormat, "Task", "Value", "ES", "EF", "LF", "LS", "LS-ES", "LF-EF");
         System.out.println(dottedLine);
 
 
         // print table body
         for (TaskNode task : tasks)
         {
-            System.out.printf(lineFormat, task.getName(),
-            task.getValue(), task.getEarlyStart(), task.getEarlyFinish(), task.getLateFinish(), task.getLateStart());
+            System.out.printf(lineFormat, 
+                task.getName(), task.getValue(),
+                task.getEarlyStart(), task.getEarlyFinish(), 
+                task.getLateFinish(), task.getLateStart(), 
+                (task.getLateStart() - task.getEarlyStart()),
+                (task.getLateFinish() - task.getEarlyFinish()));
+
             System.out.println(dottedLine);
         }
     }
